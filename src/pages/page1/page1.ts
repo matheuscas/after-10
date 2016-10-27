@@ -10,16 +10,30 @@ import localForage from "localforage";
 })
 export class Page1 {
 
-  private position: any;
+  private location: any;
   private city_name: String;
 
   constructor(public navCtrl: NavController) {
+    this.location = {
+        "lat": 0,
+        "long" : 0,
+        "city_name": "Procurando..."
+    };
     this.get_location(); 
+  }
+
+  set_location(pos: Position){
+    let lat = pos.coords.latitude;
+    let long = pos.coords.longitude;
+    this.location = {
+        "lat": lat,
+        "long" : long,
+        "city_name": `${lat}, ${long}`
+    };
   }
 
   get_location(){
     
-    this.city_name = "Procurando...";
     if (!navigator.geolocation){
       this.city_name = "Geolocation is not supported by your browser";
       return;
@@ -27,22 +41,13 @@ export class Page1 {
     
     let __this = this;
     localForage.getItem('location').then(function(pos){
-      console.log("OFFLINE");
-      __this.position = pos;
-      let lat = pos.coords.latitude;
-      let long = pos.coords.longitude;
-      __this.city_name = `${lat}, ${long}`;
+      __this.location = pos;
     }).catch(function(err){
-      console.log(err);
-      console.log("ONLINE");
       navigator.geolocation.getCurrentPosition((position) =>{
-        __this.position = position;
-        let lat = position.coords.latitude;
-        let long = position.coords.longitude;
-        __this.city_name = `${lat}, ${long}`;
-        localForage.setItem('location', JSON.stringify(position));
+        __this.set_location(position)
+        localForage.setItem('location', __this.location);
       }, () => {
-        __this.city_name = "Unable to retrieve your location";
+        __this.location.city_name = "Unable to retrieve your location";
       });
     });
   }
