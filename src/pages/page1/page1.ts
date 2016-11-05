@@ -15,8 +15,10 @@ export class Page1 {
   private location: CustomLocation;
   private city_name: String;
 
-  constructor(public navCtrl: NavController, 
-                public geocodingService: GoogleGeocoding) {
+  constructor(
+    public navCtrl: NavController, 
+    public geocodingService: GoogleGeocoding
+  ) {
     this.location = new CustomLocation();
     this.get_geolocation(); 
   }
@@ -35,23 +37,23 @@ export class Page1 {
       return;
     }
     
-    let __this = this;
+    let self = this;
     localForage.getItem('location', function(err, value){
       if(value === null){
         navigator.geolocation.getCurrentPosition((position) =>{
-          __this.set_location(position)
-          __this.get_geo_city_name();
+          self.set_location(position)
+          self.get_geo_city_name();
         }, () => {
-          __this.location.city_name = "Unable to retrieve your location";
+          self.location.city_name = "Unable to retrieve your location";
         });
       }else{
-        __this.location = value;
+        self.location = value;
       }
     });
   }
 
   get_geo_city_name(): void {
-    let __this = this;
+    let self = this;
     this.geocodingService.reverse(this.location.lat, this.location.long).subscribe(
       results => {
         console.log(results)
@@ -61,7 +63,7 @@ export class Page1 {
         this.location.city_name = "Sorry, could not find your city. :(";
       },
       () => {
-        localForage.setItem('location', __this.location);
+        localForage.setItem('location', self.location);
       }
     )
   }
