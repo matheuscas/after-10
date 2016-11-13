@@ -1,3 +1,4 @@
+import { MapCardComponent } from './../pages/page1/map-card-component/map-card.component';
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -8,7 +9,8 @@ import { Page2 } from '../pages/page2/page2';
   declarations: [
     MyApp,
     Page1,
-    Page2
+    Page2,
+    MapCardComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp)

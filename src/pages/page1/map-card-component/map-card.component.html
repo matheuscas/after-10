@@ -1,0 +1,25 @@
+<ion-card class="adv-map">
+  <div style="position: relative">
+    <img [src]="place_img" height="200px" width="200px">
+    <ion-fab right top>
+      <button ion-fab class="fab-map">
+        <ion-icon name='pin'></ion-icon>
+      </button>
+    </ion-fab>
+  </div>
+
+  <ion-item class="item item-block item-ios">
+    <ion-icon name="football" item-left large></ion-icon>
+    <h2>{{place_name}}</h2>
+    <p>{{place_address}}</p>
+  </ion-item>
+  <!--<ion-item actions>
+    <span item-left color="secondary" class="item-bold">18 min</span>
+    <span item-left color="subtle">(2.6 mi)</span>
+    <button ion-button color="primary" clear item-right icon-left>
+      <ion-icon name='navigate'></ion-icon>
+      Start
+    </button>
+  </ion-item>-->
+
+</ion-card>
