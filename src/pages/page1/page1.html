@@ -14,9 +14,18 @@
       <div class="location_header"><strong>{{location.city_name}}</strong></div>
   </div>
   <div padding>
-    <div class="loading">
+    <!--<div class="loading">
       <img src="../../assets/loading-bars.svg" alt="Loading icon"/>
       <h3 style="margin: 0px 10px 0px 0px;">Searching</h3>
-    </div>
+    </div>-->
+    <ion-row wrap>
+      <ion-col *ngFor="let place of places">
+          <map-card
+            [place_img]="place.get_photo_url()"
+            [place_name]="place.name"
+            [place_address]="place.address">
+          </map-card>
+      </ion-col>
+    </ion-row>
   </div>
 </ion-content>
