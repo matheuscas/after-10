@@ -18,8 +18,8 @@
       <img src="../../assets/loading-bars.svg" alt="Loading icon"/>
       <h3 style="margin: 0px 10px 0px 0px;">Searching</h3>
     </div>-->
-    <ion-row wrap>
-      <ion-col *ngFor="let place of places">
+    <ion-row wrap responsive-sm>
+      <ion-col width-25 *ngFor="let place of places">
           <map-card
             [place_img]="place.get_photo_url()"
             [place_name]="place.name"
